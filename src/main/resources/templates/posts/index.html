@@ -6,6 +6,9 @@
 </head>
 <body>
     <h1>Index of Posts</h1>
-
+    <div th:each="post : ${posts}">
+        <h1 th:text="${post.getTitle()}"/>
+        <p th:text="${post.getDescription()}"></p>
+    </div>
 </body>
 </html>
