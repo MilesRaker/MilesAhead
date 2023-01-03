@@ -7,15 +7,14 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 public class PostController {
     @GetMapping("/posts")
-    @ResponseBody
     public String posts() {
-        return "posts index page";
+
+        return "/posts/index";
     }
 
     @RequestMapping(path = "/posts/{id}", method = RequestMethod.GET)
-    @ResponseBody
     public String individualPost(@PathVariable int id) {
-        return "view an individual post " + id;
+        return "/posts/post";
     }
 
     @RequestMapping(path = "/posts/create", method = RequestMethod.GET)
