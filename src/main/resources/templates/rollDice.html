@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+        <meta charset="UTF-8">
+    <title>Dice Roll</title>
+</head>
+<body>
+      <h1>This Page is about Random Luck</h1>
+      <p>To get lucky, you gotta guess a number between 1 and 6 (inclusive). If your guess and the server's random generated number match, you get all the awesome in the world!</p>
+      <p>You guessed: <span th:text="${guess}"></span></p>
+      <p>The server calculated: <span th:text="${randNum}"></span></p>
+
+      <div th:if="${match}">
+        <p>You guess correctly. Enjoy all the awesome ever made! The glory is yours.</p>
+      </div>
+
+      <div th:if="${!match}">
+          <p>Your guess was incorrect. Womp womp...</p>
+      </div>
+</body>
+</html>
