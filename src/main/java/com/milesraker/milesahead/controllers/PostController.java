@@ -1,43 +1,47 @@
 package com.milesraker.milesahead.controllers;
 
 import com.milesraker.milesahead.Classes.Post;
-import org.apache.coyote.Request;
+import com.milesraker.milesahead.Classes.PostRepository;
+import com.milesraker.milesahead.Classes.User;
+import com.milesraker.milesahead.Classes.UserRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Controller
 public class PostController {
+
+    private final PostRepository postDao;
+    private final UserRepository userDao;
+    public PostController(PostRepository postDao, UserRepository userDao){
+        this.postDao = postDao;
+        this.userDao = userDao;
+        }
+
     @GetMapping("/posts")
     public String posts(Model model) {
-        Post post1 = new Post(1, 1, "Too Many Cats!", "Please take some of these cats. There are so so many. I really need to get these cute kittens into new homes.");
-        Post post2 = new Post(2, 1, "Not Enough Lizards", "Send me Lizards! Trade lizards for cats? I like the beareded ones.");
-        List<Post> posts = new ArrayList<>();
-        posts.add(post1);
-        posts.add(post2);
-        model.addAttribute("posts", posts);
+        model.addAttribute("posts", postDao.findAll());
         return "/posts/index";
     }
 
     @RequestMapping(path = "/posts/{id}", method = RequestMethod.GET)
-    public String individualPost(Model model) {
-        Post post1 = new Post(1, 1, "Too Many Cats!", "Please take some of these cats. There are so so many. I really need to get these cute kittens into new homes.");
-        model.addAttribute("post", post1);
+    public String individualPost(Model model, @PathVariable long id) {
+        model.addAttribute("post", postDao.findById(id));
         return "/posts/post";
     }
 
-    @RequestMapping(path = "/posts/create", method = RequestMethod.GET)
-    @ResponseBody
-    public String postCreate() {
-        return "view the form for creating a post";
+    @GetMapping(path = "/posts/create")
+    public String listPosts() {
+        return "/posts/create";
     }
 
-    @RequestMapping(path = "/posts/create", method = RequestMethod.POST)
-    @ResponseBody
-    public String hello() {
-        return "create a new post";
+    @PostMapping(path = "/posts/create")
+    public String submitNewPost(@RequestParam String title, @RequestParam String description, @RequestParam int posterId) {
+        Post newPost = new Post(posterId, title, description, userDao.findById(posterId));
+        postDao.save(newPost);
+        return "redirect:/posts";
     }
+
+
+
 }

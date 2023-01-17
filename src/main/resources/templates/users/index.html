@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>List of Users</title>
+</head>
+<body>
+    <h1>List of Users:</h1>
+    <div th:each="user : ${users}">
+        <h1 th:text="${user.getUsername()}"></h1>
+        <p th:text="${user.getEmail()}"></p>
+</body>
+</html>
