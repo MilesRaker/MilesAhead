@@ -4,9 +4,7 @@ import com.milesraker.milesahead.Classes.User;
 import com.milesraker.milesahead.Classes.UserRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class UserController {
@@ -23,14 +21,32 @@ public class UserController {
     }
 
     @GetMapping(path="/users/create")
-    public String createUser(){
-        return "/users/create";
+    public String createUser(Model model){
+        model.addAttribute("user", new User());
+        return "/users/createAndEdit";
     }
 
-    @PostMapping(path="/users/create")
-    public String submitNewUser(@RequestParam String username, @RequestParam String email, @RequestParam String password){
-        User newUser = new User(username, email, password);
-        userDao.save(newUser);
+    @PostMapping(path="/users/createAndEdit")
+    public String submitNewUser(@ModelAttribute User user){
+        userDao.save(user);
+        return "redirect:/users";
+    }
+
+    @GetMapping (path="/users/{id}")
+    public String individualUser(Model model, @PathVariable long id) {
+        model.addAttribute("user", userDao.findById(id));
+        return "/users/user";
+    }
+
+    @GetMapping(path="/users/{id}/edit")
+    public String editUser(Model model, @PathVariable long id){
+        model.addAttribute("user", userDao.findById(id));
+        return "/users/createAndEdit";
+    }
+
+    @PostMapping(path="/users/edit")
+    public String editUser(@ModelAttribute User user){
+        userDao.save(user);
         return "redirect:/users";
     }
 }

@@ -12,10 +12,10 @@ public class Post {
     @Column(nullable=false)
     private int posterId;
 
-    @Column(nullable=false, length=100)
+    @Column(nullable=false, length=100, columnDefinition = "TEXT")
     private String title;
 
-    @Column(length=512)
+    @Column(length=512, columnDefinition = "TEXT")
     private String description;
 
     @ManyToOne
@@ -32,7 +32,7 @@ public class Post {
     }
 
     public long getId() { return id; }
-
+    public String getIdString() { return Long.toString(id); }
     public String getTitle() {
         return title;
     }
@@ -49,4 +49,23 @@ public class Post {
         return user;
     }
 
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public void setPosterId(int posterId) {
+        this.posterId = posterId;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 }
