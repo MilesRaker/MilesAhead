@@ -1,4 +1,4 @@
-package com.milesraker.milesahead.Classes;
+package com.milesraker.milesahead.Models;
 
 import jakarta.persistence.*;
 
@@ -10,10 +10,10 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(nullable=false, length=100)
+    @Column(nullable=false, length=100, unique = true)
     private String username;
 
-    @Column(nullable=false, length=100)
+    @Column(nullable=false, length=100, unique = true)
     private String email;
 
     @Column(nullable=false, length=100)
@@ -23,6 +23,14 @@ public class User {
     private List<Post> posts;
 
     public User() {}
+
+    public User(User copy){
+        this.id=copy.id;
+        this.username = copy.username;
+        this.email = copy.email;
+        this.password = copy.password;
+    }
+
 
     public User(String username, String email, String password){
         this.username = username;

@@ -1,7 +1,7 @@
 package com.milesraker.milesahead.controllers;
 
-import com.milesraker.milesahead.Classes.User;
-import com.milesraker.milesahead.Classes.UserRepository;
+import com.milesraker.milesahead.Models.User;
+import com.milesraker.milesahead.repositories.UserRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;

@@ -1,6 +1,9 @@
 package com.milesraker.milesahead.controllers;
 
-import com.milesraker.milesahead.Classes.*;
+import com.milesraker.milesahead.Models.*;
+import com.milesraker.milesahead.repositories.PostRepository;
+import com.milesraker.milesahead.repositories.UserRepository;
+import com.milesraker.milesahead.services.EmailService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;

@@ -1,4 +1,4 @@
-package com.milesraker.milesahead.Classes;
+package com.milesraker.milesahead.Models;
 
 import jakarta.persistence.*;
 

@@ -1,5 +1,6 @@
-package com.milesraker.milesahead.Classes;
+package com.milesraker.milesahead.services;
 
+import com.milesraker.milesahead.Models.Post;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.MailException;
