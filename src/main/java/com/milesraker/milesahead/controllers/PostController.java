@@ -1,7 +1,6 @@
 package com.milesraker.milesahead.controllers;
 
-import com.milesraker.milesahead.Classes.Post;
-import com.milesraker.milesahead.Classes.PostRepository;
+import com.milesraker.milesahead.Classes.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -10,10 +9,13 @@ import org.springframework.web.bind.annotation.*;
 public class PostController {
 
     private final PostRepository postDao;
+    private final EmailService emailService;
+    private final UserRepository userDao;
 
-    public PostController(PostRepository postDao){
+    public PostController(PostRepository postDao, EmailService emailService, UserRepository userDao) {
         this.postDao = postDao;
-
+        this.emailService = emailService;
+        this.userDao = userDao;
         }
 
     @GetMapping("/posts")
@@ -36,18 +38,24 @@ public class PostController {
 
     @PostMapping(path = "/posts/create")
     public String create(@ModelAttribute("post") Post post) {
+        User user = userDao.getReferenceById(1L);
+        post.setUser(user);
         postDao.save(post);
+        // send email here
+        emailService.prepareAndSend(post, "New Post Created", "A new post has been created with the title: " + post.getTitle());
         return "redirect:/posts";
     }
 
     @GetMapping(path = "/posts/{id}/edit")
     public String editPost(Model model, @PathVariable long id) {
+
         model.addAttribute("post", postDao.getReferenceById(id));
         return "posts/createAndEdit";
     }
 
     @PostMapping("/posts/edit")
     public String edit(@ModelAttribute Post post) {
+
         postDao.save(post);
         return "redirect:/posts";
 
