@@ -29,6 +29,7 @@ public class User {
         this.username = copy.username;
         this.email = copy.email;
         this.password = copy.password;
+        this.posts = copy.posts;
     }
 
 

@@ -4,6 +4,7 @@ import com.milesraker.milesahead.Models.*;
 import com.milesraker.milesahead.repositories.PostRepository;
 import com.milesraker.milesahead.repositories.UserRepository;
 import com.milesraker.milesahead.services.EmailService;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -35,13 +36,14 @@ public class PostController {
 
     @GetMapping(path = "/posts/create")
     public String listPosts(Model model) {
+
         model.addAttribute("post", new Post());
         return "/posts/createAndEdit";
     }
 
     @PostMapping(path = "/posts/create")
     public String create(@ModelAttribute("post") Post post) {
-        User user = userDao.getReferenceById(1L);
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         post.setUser(user);
         postDao.save(post);
         // send email here
@@ -51,7 +53,7 @@ public class PostController {
 
     @GetMapping(path = "/posts/{id}/edit")
     public String editPost(Model model, @PathVariable long id) {
-
+// if post is owned by authenticated user, then allow access
         model.addAttribute("post", postDao.getReferenceById(id));
         return "posts/createAndEdit";
     }
