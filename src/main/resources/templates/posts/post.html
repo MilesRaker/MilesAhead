@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${post.getTitle()}">Post placeholder</title>
+</head>
+<body>
+    <h1 th:text="${post.getTitle()}">An Individual Post</h1>
+    <div>
+        <p>Post id: <span th:text="${post.getId()}"/></p>
+        <p>Poster id: <span th:text="${post.getPosterId()}"/></p>
+        <p>Description: <span th:text="${post.getDescription()}"/></p>
+    </div>
+</body>
+</html>
