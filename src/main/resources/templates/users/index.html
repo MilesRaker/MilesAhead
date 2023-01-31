@@ -1,13 +1,17 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
+<head th:replace="partials :: head">
     <title>List of Users</title>
 </head>
 <body>
+    <nav th:replace="partials :: nav"></nav>
     <h1>List of Users:</h1>
     <div th:each="user : ${users}">
         <h1 th:text="${user.getUsername()}"></h1>
         <p th:text="${user.getEmail()}"></p>
+        <form th:action="@{/users/delete}" th:method="post">
+            <button type="submit" name="userId" th:value="${user.id}">Delete User</button>
+        </form>
+    </div>
 </body>
 </html>
