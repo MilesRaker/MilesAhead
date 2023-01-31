@@ -10,6 +10,9 @@
         <p>Post id: <span th:text="${post.getId()}"/></p>
         <p>Poster id: <span th:text="${post.getPosterId()}"/></p>
         <p>Description: <span th:text="${post.getDescription()}"/></p>
+        <form th:action="@{/posts/delete}" th:method="post" >
+            <button name="postId" th:value="${post.id}" type="submit">Delete Post</button>
+        </form>
     </div>
 </body>
 </html>

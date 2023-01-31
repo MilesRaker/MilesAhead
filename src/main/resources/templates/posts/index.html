@@ -9,6 +9,8 @@
     <div th:each="post : ${posts}">
         <h1 th:text="${post.getTitle()}"/>
         <p th:text="${post.getDescription()}"></p>
+        <form th:action="@{/posts/viewPost}" th:method="post">
+            <button name="postId" th:value="${post.id}" type="submit">View Post</button>
     </div>
 </body>
 </html>
