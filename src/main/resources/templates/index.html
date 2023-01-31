@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Miles AheadTitle</title>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="partials :: head">
+    <title>Miles Ahead</title>
 </head>
 <body>
-
+    <nav th:replace="partials.html :: navBar"></nav>
+    <div th:replace="partials.html :: footer"></div>
 </body>
 </html>
