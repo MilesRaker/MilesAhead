@@ -1,17 +1,18 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
-<head th:replace="partials :: head">
+<head th:replace="~{partials :: head}">
     <title>Index of Posts</title>
 </head>
 <body>
-    <nav th:replace="partials :: nav"></nav>
-    <a href="/posts/create">Create a Post</a>
+    <nav th:replace="~{partials :: head}"></nav>
+    <a href="/posts/create" th:if="${#authentication.isAuthenticated()}">Create a Post</a>
     <h1>Index of Posts</h1>
     <div th:each="post : ${posts}">
         <h1 th:text="${post.getTitle()}"/>
         <p th:text="${post.getDescription()}"></p>
         <form th:action="@{/posts/viewPost}" th:method="post">
             <button name="postId" th:value="${post.id}" type="submit">View Post</button>
+        </form>
     </div>
 </body>
 </html>

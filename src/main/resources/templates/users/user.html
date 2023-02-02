@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
+<head th:replace="~{partials :: head}">
     <title>User page ${user.name}</title>
 </head>
 <body>
+<nav th:replace="~{partials :: nav}"></nav>
     <h1>User page ${user.name}</h1>
         <p>Username: ${user.username}</p>
         <p>Email: ${user.email}</p>
@@ -13,5 +13,6 @@
         <h1 th:text="${post.getTitle()}"></h1>
         <p th:text="${post.getDescription()}"></p>
     </div>
+<footer th:replace="~{partials :: footer}"></footer>
 </body>
 </html>
