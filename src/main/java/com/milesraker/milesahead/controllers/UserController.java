@@ -58,5 +58,10 @@ public class UserController {
         return "redirect:/users";
     }
 
-
+    @PostMapping(path="/users/delete")
+    public String deleteUser(@RequestParam(name="userId") long id){
+        User user = userDao.getReferenceById(id);
+        userDao.delete(user);
+        return "redirect:/users";
+    }
 }
