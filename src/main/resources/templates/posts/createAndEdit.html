@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
+<head th:replace="~{partials :: head}">
     <title th:text="${post.title} == null ? 'Create Post' : 'Edit Post'">Post</title>
 </head>
 <body>
+<nav th:replace="~{partials :: navBar}"></nav>
 <!-- in an h1, display "Create Post" if post.title == null, else display "Edit Post"-->
 <h1 th:text="${post.title} == null ? 'Create Post' : 'Edit Post'">Post</h1>
   <form id="createPost" th:method="post" th:object="${post}" action="#" th:action="@{/posts/create}">
@@ -17,5 +17,6 @@
       <input type="hidden" th:field="*{id}" th:value="${post.getId()}" name="id" id="id">
     <input type="submit"/>
   </form>
+<footer th:replace="~{partials :: footer}"></footer>
 </body>
 </html>

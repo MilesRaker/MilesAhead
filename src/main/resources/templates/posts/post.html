@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
-<head>
+<head th:replace="~{partials :: head}">
     <meta charset="UTF-8">
     <title th:text="${post.getTitle()}">Post placeholder</title>
 </head>
 <body>
+    <nav th:replace="~{partials :: navBar}"></nav>
     <h1 th:text="${post.getTitle()}">An Individual Post</h1>
     <div>
         <p>Post id: <span th:text="${post.getId()}"/></p>
@@ -14,5 +15,6 @@
             <button name="postId" th:value="${post.id}" type="submit">Delete Post</button>
         </form>
     </div>
+    <footer th:replace="~{partials :: footer}"></footer>
 </body>
 </html>

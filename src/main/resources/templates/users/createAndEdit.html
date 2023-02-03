@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
+<head th:replce="~{partials::head}">
     <title th:text="${user.username} == null ? 'Create User' : 'Edit User'">User</title>
 </head>
 <body>
+    <div th:replace="~{partials::navBar}"></div>
+
 <!-- h1 tag displays "Create User" if ${user.name} == null, else display "Edit User" -->
-<h1 th:text="${user.username} == null ? 'Create User' : 'Edit User'">User</h1>
+    <h1 th:text="${user.username} == null ? 'Create User' : 'Edit User'">User</h1>
     <form id="createUser" th:method="post" th:object="${user}" action="#" th:action="@{/users/createAndEdit}"   >
         <label for="username">Username</label>
         <input th:field="*{username}" type="text" id="username" name="username" placeholder="Username">
@@ -17,5 +18,6 @@
         <input type="hidden" th:field="*{id}" id="id" name="id">
         <button type="submit">Submit</button>
     </form>
+    <div th:replace="~{partials::footer}"></div>
 </body>
 </html>

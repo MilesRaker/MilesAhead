@@ -2,8 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head th:replace="~{partials :: head}">
         <title>Log In</title>
-    </head>
-    <body>
+</head>
+<body>
     <nav th:replace="~{partials :: nav}"></nav>
         <h1>Log In</h1>
         <div th:if="${param.error}">
@@ -20,6 +20,6 @@
             <input id="password" name="password" type="password" />
             <input type="submit" value="Log In" />
         </form>
-    </body>
     <footer th:replace="~{partials :: footer}"></footer>
+</body>
 </html>
