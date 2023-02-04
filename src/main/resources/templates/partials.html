@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://thymeleaf.org">
+<html xmlns:th="http://thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:fragment="head">
     <meta charset="UTF-8" />
     <title>partials</title>
@@ -12,8 +12,8 @@
                 <li><a href="/">Home</a></li>
                 <li><a href="/posts">Posts</a></li>
                 <li><a href="/users">Users</a></li>
-                <li><a href="/login">Login</a></li>
-                <li>
+                <li sec:authorize="!isAuthenticated()"><a href="/login">Login</a></li>
+                <li sec:authorize="isAuthenticated()">
                     <form th:action="@{/logout}" th:method="post">
                         <button class="btn-link btn" style="margin-top: 8px">Logout</button>
                     </form>
